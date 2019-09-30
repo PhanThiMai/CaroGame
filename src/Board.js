@@ -1,27 +1,23 @@
-import React from "react";
-import Square from "./Square";
-import PropTypes from "prop-types";
+import React from 'react';
+import Square from './Square';
 
-class Board extends React.Component {
-  static propTypes = {
-    squares: PropTypes.array,
-    onClick: PropTypes.func,
-    values: PropTypes.array
-  };
-
+class Board extends React.PureComponent {
   renderSquare(i) {
+    const { squares, onClick, values } = this.props;
     return (
       <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-        values={this.props.values}
+        value={squares[i]}
+        onClick={() => onClick(i)}
+        values={values}
         i={i}
+        key={`square${i}`}
       />
     );
   }
+
   renderBoardRow(i, arr) {
     return (
-      <div className="board-row">
+      <div key={`board-row${i}`} className="board-row">
         {arr.map(number => this.renderSquare(number + i * 20))}
       </div>
     );
