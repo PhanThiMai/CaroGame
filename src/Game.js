@@ -73,7 +73,7 @@ function checkHangNgang(row, column, value, squares) {
 
   if (squares !== undefined) {
     for (let i = 0; i <= end - begin - 4; i += 1) {
-      if (squares[value - begin] === null || squares[value + end + 1] === null)
+      if (squares[value - 5 + i] === null || squares[value - i + 1] === null)
         if (
           squares[row * 20 + begin + i] &&
           squares[row * 20 + begin + i + 1] === squares[row * 20 + begin + i] &&
@@ -223,21 +223,17 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       winner: null,
-      values: [
-        {
-          result: Array(5).fill(null)
-        }
-      ],
+      values: [null],
       reOdered: false
     };
   }
 
   handleClick(i) {
     const { history, stepNumber, winner, xIsNext, values } = this.state;
-
     const history1 = history.slice(0, stepNumber + 1);
     const current = history1[history1.length - 1];
     const squares = current.squares.slice();
+
     if (squares[i] || winner) {
       return;
     }
@@ -250,28 +246,31 @@ class Game extends React.Component {
     const hangNgang = checkHangNgang(row, column, i, squares);
     const hangCheo1 = checkHangCheo1(row, column, i, squares);
     const hangCheo2 = checkHangCheo2(row, column, i, squares);
-    if (hangDoc || hangNgang || hangCheo1 || hangCheo2) {
-      const result = hangDoc || hangNgang || hangCheo1 || hangCheo2;
+    const result = hangDoc || hangNgang || hangCheo1 || hangCheo2;
+    values[stepNumber + 1] = result;
+
+    if (result) {
       this.setState({
         winner: squares[i],
-        values: values.concat([{ result }]),
-        history: history.concat([
+        values,
+        history: history1.concat([
           {
             squares
           }
         ]),
-        stepNumber: history.length
+        stepNumber: history1.length
       });
     } else {
       this.setState({
-        history: history.concat([
+        history: history1.concat([
           {
             squares
           }
         ]),
-        stepNumber: history.length,
+        stepNumber: history1.length,
         xIsNext: !xIsNext,
-        values: values.concat([null])
+        values,
+        winner: null
       });
     }
   }
@@ -279,12 +278,7 @@ class Game extends React.Component {
   jumpTo(step) {
     const { values } = this.state;
     const result = values[step];
-    if (
-      result !== null &&
-      (result.result === null ||
-        result.result.length === 0 ||
-        result.result === undefined)
-    ) {
+    if (result === null || result === undefined) {
       this.setState({
         stepNumber: step,
         xIsNext: step % 2 === 0,
@@ -387,7 +381,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={i => this.handleClick(i)}
-            values={result ? result.result : null}
+            values={result}
           />
         </div>
 
