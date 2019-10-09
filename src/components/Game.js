@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 import Board from './Board';
-import './App.css';
+import '../App.css';
 
 function checkHangDoc(row, column, value, squares) {
   let begin;
@@ -32,13 +32,13 @@ function checkHangDoc(row, column, value, squares) {
         if (
           squares[20 * (begin + i) + column] &&
           squares[column + 20 * (begin + i + 1)] ===
-            squares[column + 20 * (begin + i)] &&
+          squares[column + 20 * (begin + i)] &&
           squares[column + 20 * (begin + i + 2)] ===
-            squares[column + 20 * (begin + i)] &&
+          squares[column + 20 * (begin + i)] &&
           squares[column + 20 * (begin + i + 3)] ===
-            squares[column + 20 * (begin + i)] &&
+          squares[column + 20 * (begin + i)] &&
           squares[column + 20 * (begin + i + 4)] ===
-            squares[column + 20 * (begin + i)]
+          squares[column + 20 * (begin + i)]
         )
           return [
             20 * (begin + i) + column,
@@ -130,13 +130,13 @@ function checkHangCheo1(row, column, value, squares) {
         if (
           squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 1) + column1 + 1] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 2) + column1 + 2] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 3) + column1 + 3] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 4) + column1 + 4] ===
-            squares[20 * (row1 + i) + column1]
+          squares[20 * (row1 + i) + column1]
         )
           return [
             20 * (row1 + i) + column1,
@@ -190,13 +190,13 @@ function checkHangCheo2(row, column, value, squares) {
         if (
           squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 1) + column1 - 1] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 2) + column1 - 2] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 3) + column1 - 3] ===
-            squares[20 * (row1 + i) + column1] &&
+          squares[20 * (row1 + i) + column1] &&
           squares[20 * (row1 + i + 4) + column1 - 4] ===
-            squares[20 * (row1 + i) + column1]
+          squares[20 * (row1 + i) + column1]
         )
           return [
             20 * (row1 + i) + column1,
