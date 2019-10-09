@@ -301,11 +301,7 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       winner: null,
-      values: [
-        {
-          result: Array(5).fill(null)
-        }
-      ],
+      values: [null],
       reOdered: false
     });
   }
